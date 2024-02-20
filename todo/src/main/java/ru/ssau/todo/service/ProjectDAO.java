@@ -6,17 +6,24 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Repository;
 
 import ru.ssau.todo.api.model.Project;
 
+@Repository
 public class ProjectDAO implements IDataAccessObject<Project> {
-    
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    @NonNull
+    private ProjectRowMapper rowMapper;
+
     @Override
     public void Create(Project project) {
-        String sql = "INSERT INTO public.\"Project\" (\"Description\" = ?, \"StartDate\" = ?, \"EndDate\" = ?) VALUES ( ?, ?, ?)";
+        String sql = "INSERT INTO public.project (description = ?, startdate = ?, enddate = ?) VALUES ( ?, ?, ?)";
         int result = 0;
         try {
             result = jdbcTemplate.update(sql, project.getDescription(), project.getStartDate(), project.getEndDate());
@@ -31,7 +38,7 @@ public class ProjectDAO implements IDataAccessObject<Project> {
 
     @Override
     public void Delete(int id) {
-        String sql = "DELETE FROM public.\"Project\" WHERE \"Id\" = ?";
+        String sql = "DELETE FROM public.project WHERE id = ?";
         int result = 0;
         try {
             result = jdbcTemplate.update(sql);
@@ -46,10 +53,10 @@ public class ProjectDAO implements IDataAccessObject<Project> {
 
     @Override
     public Optional<Project> Get(int id) {
-        String sql = "SELECT * FROM public.\"Project\" WHERE \"Id\" = ?";
+        String sql = "SELECT * FROM public.project WHERE id = ?";
         Project result = null;
         try {
-            result = jdbcTemplate.queryForObject(sql, Project.class, id);
+            result = jdbcTemplate.queryForObject(sql, rowMapper, id);
         }
         catch (DataAccessException ex) {
             result = null;
@@ -59,9 +66,9 @@ public class ProjectDAO implements IDataAccessObject<Project> {
 
     @Override
     public List<Project> List() {
-        String sql = "SELECT * FROM public.\"Project\"";
+        String sql = "SELECT * FROM public.project";
         try {
-            return jdbcTemplate.queryForList(sql, Project.class);
+            return jdbcTemplate.query(sql, rowMapper);
         }
         catch (DataAccessException ex) {
             return null;
@@ -70,7 +77,7 @@ public class ProjectDAO implements IDataAccessObject<Project> {
 
     @Override
     public void Update(Project project, int id) {
-        String sql = "UPDATE public.\"Project\" SET \"Description\" = ?, \"StartDate\" = ?, \"EndDate\" = ? WHERE \"Id\" = ?";
+        String sql = "UPDATE public.project SET description = ?, startdate = ?, enddate = ? WHERE id = ?";
         int result = 0;
         try {
             result = jdbcTemplate.update(sql, project.getDescription(), project.getStartDate(), project.getEndDate(), id);

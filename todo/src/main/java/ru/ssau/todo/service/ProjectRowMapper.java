@@ -5,10 +5,11 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Component;
 
 import ru.ssau.todo.api.model.Project;
 
-
+@Component
 public class ProjectRowMapper implements RowMapper<Project>{
 
     @Override
