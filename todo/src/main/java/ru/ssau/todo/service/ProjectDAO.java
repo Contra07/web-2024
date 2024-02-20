@@ -20,17 +20,17 @@ public class ProjectDAO implements IDataAccessObject<Project> {
     private ProjectRowMapper rowMapper;
 
     @Override
-    public void create(Project t) {
+    public void Create(Project t) {
         // TODO Auto-generated method stub
     }
 
     @Override
-    public void delete(int id) {
-        
+    public void Delete(int id) {
+
     }
 
     @Override
-    public Optional<Project> get(int id) {
+    public Optional<Project> Get(int id) {
         String sql = "SELECT * FROM Project WHERE Id = ?";
         Project course = null;
         try {
@@ -43,13 +43,13 @@ public class ProjectDAO implements IDataAccessObject<Project> {
     }
 
     @Override
-    public List<Project> list() {
+    public List<Project> List() {
         // TODO Auto-generated method stub
         return null;
     }
 
     @Override
-    public void update(Project t, int id) {
+    public void Update(Project t, int id) {
         // TODO Auto-generated method stub
         
     }

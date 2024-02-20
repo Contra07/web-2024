@@ -4,13 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IDataAccessObject <T> {
-    List<T> list();
+    List<T> List();
 
-    void create(T t);
+    void Create(T t);
 
-    Optional<T> get(int id);
+    Optional<T> Get(int id);
 
-    void update(T t, int id);
+    void Update(T t, int id);
 
-    void delete(int id);
+    void Delete(int id);
 }
