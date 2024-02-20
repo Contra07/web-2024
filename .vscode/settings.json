@@ -22,5 +22,7 @@
             "username": "postgres",
             "password": "7091"
         }
-    ]
+    ],
+    "java.dependency.packagePresentation": "hierarchical",
+    "java.project.explorer.showNonJavaResources": true
 }
