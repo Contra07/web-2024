@@ -11,11 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Project {
     private int id;
+    private String Name;
     private String description;
     private Date startDate;
     private Date endDate;
-
-    public Project(int id){
-        this.id = id;
-    }
 }
