@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Project {
     private int id;
-    private String Name;
+    private String name;
     private String description;
     private Date startDate;
     private Date endDate;
