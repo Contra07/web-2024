@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 public class Project {
     @Id
     @GeneratedValue
-    private int id;
+    private long id;
     private String name;
     private String description;
     private Date startDate;

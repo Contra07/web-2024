@@ -20,6 +20,6 @@ public class Task {
     private long projectId;
     private String name;
     private String description;
-    private Date completiondate;
+    private Date completionDate;
     private boolean done;
 }
