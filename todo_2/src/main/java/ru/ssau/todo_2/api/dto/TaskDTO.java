@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Task {
+public class TaskDTO {
     private long id;
     private long projectId;
     private String name;
