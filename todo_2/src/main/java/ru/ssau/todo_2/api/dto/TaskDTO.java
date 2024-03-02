@@ -1,7 +1,7 @@
 package ru.ssau.todo_2.api.dto;
 
 import java.time.LocalDate;
-import java.util.Date;
+import java.util.UUID;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,10 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TaskDTO {
-    private long id;
-    private long projectId;
+    private UUID id;
+    private UUID projectId;
     private String name;
     private String description;
-    private Date completionDate;
-    private LocalDate done;
+    private LocalDate completionDate;
+    private boolean done;
 }
