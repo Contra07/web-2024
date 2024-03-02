@@ -1,6 +1,6 @@
 package ru.ssau.todo_2.data.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
@@ -25,10 +25,12 @@ public class Project {
     private UUID id;
     @Column(name = "name", length = 100)
     private String name;
-    @Column(columnDefinition="TEXT")
+    @Column(name = "description",columnDefinition="TEXT")
     private String description;
     @Temporal(TemporalType.DATE)
-    private Date startDate;
+    @Column(name = "startdate")
+    private LocalDate startDate;
+    @Column(name = "enddate")
     @Temporal(TemporalType.DATE)
-    private Date endDate;
+    private LocalDate endDate;
 }
