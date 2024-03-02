@@ -3,7 +3,7 @@ $$
 BEGIN 
     CREATE TABLE IF NOT EXISTS Project
     (
-        Id SERIAL PRIMARY KEY,
+        Id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
         Name varchar(100),
         Description TEXT,
         StartDate DATE,
@@ -12,8 +12,8 @@ BEGIN
 
     CREATE TABLE IF NOT EXISTS Task
     (
-        Id SERIAL PRIMARY KEY,
-        ProjectId SERIAL REFERENCES Project(Id),
+        Id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        ProjectId UUID REFERENCES Project(Id),
         Name varchar(100),
         Description TEXT,
         EndDate date,
