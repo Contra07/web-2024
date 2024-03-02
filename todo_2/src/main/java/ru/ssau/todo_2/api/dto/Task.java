@@ -1,15 +1,13 @@
-package ru.ssau.todo_2.api.model;
+package ru.ssau.todo_2.api.dto;
 
 import java.util.Date;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
