@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.ssau.todo_2.data.entity.Project;
 import ru.ssau.todo_2.data.entity.Task;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,22 +19,22 @@ public class ProjectPojo {
     private LocalDate startDate;
     private LocalDate endDate;
 
-    public static ProjectPojo fromEntity(Project project) {
+    public static ProjectPojo fromEntity(Project entity) {
         return new ProjectPojo(
-                project.getId(),
-                project.getName(),
-                project.getDescription(),
-                project.getStartDate(),
-                project.getStartDate());
+            entity.getId(),
+            entity.getName(),
+            entity.getDescription(),
+            entity.getStartDate(),
+            entity.getStartDate());
     }
 
-    public static Project toEntity(ProjectPojo projectDTO){
+    public Project toEntity(){
         return new Project(
-            projectDTO.id,
-            projectDTO.name,
-            projectDTO.description,
-            projectDTO.startDate,
-            projectDTO.endDate,
+            this.getId(),
+            this.getName(),
+            this.getDescription(),
+            this.getStartDate(),
+            this.getEndDate(),
             new HashSet<Task>()
         );
     }

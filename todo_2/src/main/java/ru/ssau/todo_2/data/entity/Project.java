@@ -6,39 +6,50 @@ import java.util.UUID;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-@Entity
+@jakarta.persistence.Entity
 @Table(name = "project", schema = "public")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-public class Project {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", length = 100)
-    private UUID id;
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+public class Project extends Entity{
     @Column(name = "name", length = 100)
     private String name;
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
-    @Column(name = "startDate")
+    @Column(name = "startdate")
     @Temporal(TemporalType.DATE)
     private LocalDate startDate;
-    @Column(name = "endDate")
+    @Column(name = "enddate")
     @Temporal(TemporalType.DATE)
     private LocalDate endDate;
-    @OneToMany(mappedBy = "task", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Task> tasks;
+
+    public Project(UUID id, String name, String description, LocalDate startDate, LocalDate endDate, Set<Task> tasks){
+        super(id);
+        this.name = name;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.tasks = tasks;
+    }
+
+    public void copyNotNullFields(Project project){
+        setId(project.getId());
+        setName(project.getName());
+        setDescription(project.getDescription());
+        setStartDate(project.getStartDate());
+        setEndDate(project.getEndDate());
+    }
 }

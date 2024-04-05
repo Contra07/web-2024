@@ -27,14 +27,14 @@ public class TaskPojo {
                 task.isDone());
     }
 
-    public static Task toEntity(TaskPojo taskDTO){
+    public Task toEntity() {
         return new Task(
-            taskDTO.getId(),
+            this.getId(),
             null,
-            taskDTO.getName(),
-            taskDTO.getDescription(),
-            taskDTO.getCompletionDate(),
-            taskDTO.isDone()
+            this.getName(),
+            this.getDescription(),
+            this.getCompletionDate(),
+            this.isDone()
         );
     }
 }
