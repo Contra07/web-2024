@@ -1,6 +1,8 @@
 package ru.ssau.todo_2.api.controller;
 
+import java.util.Dictionary;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -38,7 +40,7 @@ public class ProjectController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<ProjectPojo>> getProject(){
+    public ResponseEntity<List<ProjectPojo>> getProjects(){
         List<ProjectPojo> projectPojos = todoService.readAllProjects();
         return projectPojos.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok().body(projectPojos);
     }
@@ -80,5 +82,15 @@ public class ProjectController {
             return ResponseEntity.badRequest().build();
         }
     }
-    
+
+    @GetMapping("/tasksnumber")
+    public ResponseEntity<Dictionary<UUID, Integer>> getTasksNumber() {
+        try{    
+            Dictionary<UUID, Integer> result = todoService.countTasks();
+            
+            return result.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok().body(result);    
+        }catch(Exception ex){
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }

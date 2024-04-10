@@ -1,6 +1,7 @@
 package ru.ssau.todo_2.api.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -18,6 +19,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @Controller
@@ -38,8 +41,12 @@ public class TaskController {
 
     @GetMapping("/all")
     public ResponseEntity<List<TaskPojo>> readTasks(@PathVariable String projectId){
-        List<TaskPojo> taskPojos = todoService.readAllTasks(UUID.fromString(projectId));
-        return taskPojos.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok().body(taskPojos);
+        try{
+            List<TaskPojo> taskPojos = todoService.readAllTasks(UUID.fromString(projectId));
+            return taskPojos.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok().body(taskPojos);
+        } catch (IllegalArgumentException ex) {
+            return ResponseEntity.notFound().build();
+        }
     }
     
 
@@ -87,5 +94,7 @@ public class TaskController {
             return ResponseEntity.badRequest().build();
         }
     }
+
+   
     
 }
