@@ -1,13 +1,14 @@
 package ru.ssau.todo_2.api.controller;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.server.ResponseStatusException;
 
 import lombok.AllArgsConstructor;
 import ru.ssau.todo_2.api.dto.TaskPojo;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -34,8 +34,8 @@ public class TaskController {
         try {
             Optional<TaskPojo> task = todoService.readTask(UUID.fromString(projectId), UUID.fromString(id));
             return task.isEmpty() ? ResponseEntity.notFound().build() :ResponseEntity.ok().body(task.get());
-        } catch (IllegalArgumentException ex) {
-            return ResponseEntity.notFound().build();
+        } catch(Exception ex){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());
         }
     }
 
@@ -44,8 +44,9 @@ public class TaskController {
         try{
             List<TaskPojo> taskPojos = todoService.readAllTasks(UUID.fromString(projectId));
             return taskPojos.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok().body(taskPojos);
-        } catch (IllegalArgumentException ex) {
-            return ResponseEntity.notFound().build();
+        }
+        catch(Exception ex){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());
         }
     }
     
@@ -56,8 +57,8 @@ public class TaskController {
             Optional<TaskPojo> task = todoService.createTask(UUID.fromString(projectId), taskPojo);
             return task.isEmpty() ? ResponseEntity.badRequest().build() : ResponseEntity.ok().body(task.get());
         }
-        catch(IllegalArgumentException ex){
-            return ResponseEntity.notFound().build();
+        catch(Exception ex){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());
         }
     }
 
@@ -70,8 +71,8 @@ public class TaskController {
             }
             return ResponseEntity.ok().body(task.get());
         }
-        catch(IllegalArgumentException ex){
-            return ResponseEntity.notFound().build();
+        catch(Exception ex){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());
         }
     }
 
@@ -80,21 +81,18 @@ public class TaskController {
         try{
             return todoService.deleteTask(UUID.fromString(id), UUID.fromString(id)) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
         }
-        catch(IllegalArgumentException ex){
-            return ResponseEntity.badRequest().build();
+        catch(Exception ex){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());
         }
     }
 
-    @DeleteMapping("")
+    @DeleteMapping("done")
     public ResponseEntity<String> deleteAllTask(@PathVariable String projectId) {
         try{
             return todoService.deleteAllDoneByProject(UUID.fromString(projectId)) ? ResponseEntity.noContent().build() :  ResponseEntity.notFound().build();
         }
-        catch(IllegalArgumentException ex){
-            return ResponseEntity.badRequest().build();
+        catch(Exception ex){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());
         }
     }
-
-   
-    
 }
