@@ -1,4 +1,4 @@
-package ru.ssau.todo_2.api.controller;
+package ru.ssau.todo_3.api.controller;
 
 import java.util.Dictionary;
 import java.util.List;
@@ -11,8 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.AllArgsConstructor;
-import ru.ssau.todo_2.api.dto.ProjectPojo;
-import ru.ssau.todo_2.api.service.TodoService;
+import ru.ssau.todo_3.api.dto.ProjectPojo;
+import ru.ssau.todo_3.api.service.TodoService;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
