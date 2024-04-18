@@ -1,4 +1,4 @@
-package ru.ssau.todo.service;
+package ru.ssau.todo_1.service;
 
 import java.sql.Types;
 import java.util.Date;
@@ -13,7 +13,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
-import ru.ssau.todo.api.model.Project;
+import ru.ssau.todo_1.api.model.Project;
 
 @Repository
 public class ProjectDAO {

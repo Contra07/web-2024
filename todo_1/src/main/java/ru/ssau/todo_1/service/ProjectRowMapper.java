@@ -1,4 +1,4 @@
-package ru.ssau.todo.service;
+package ru.ssau.todo_1.service;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
-import ru.ssau.todo.api.model.Project;
+import ru.ssau.todo_1.api.model.Project;
 
 @Component
 public class ProjectRowMapper implements RowMapper<Project>{

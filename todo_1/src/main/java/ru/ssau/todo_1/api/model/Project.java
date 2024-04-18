@@ -1,4 +1,4 @@
-package ru.ssau.todo.api.model;
+package ru.ssau.todo_1.api.model;
 
 import java.util.Date;
 
