@@ -1,0 +1,28 @@
+<h2>Проекты</h2>
+
+<div>
+  <button [routerLink]="'/projects/new'">Создать новый проект</button>
+</div>
+<div>
+  <input
+    type="search"
+    title="search bar"
+    #box
+    (keyup.enter)="onEnter(box.value)"
+  />
+</div>
+<div *ngIf="projectsToShow.length != 0; else elseBlock">
+  <ul>
+    <li *ngFor="let project of projectsToShow">
+      <app-project-show
+        [project]="project"
+        [taskNumber]="taskNumber.get(project.id)"
+      ></app-project-show>
+    </li>
+  </ul>
+</div>
+<ng-template  #elseBlock>
+<div>
+  <h3> Проекты не наедены</h3>
+</div>
+</ng-template >

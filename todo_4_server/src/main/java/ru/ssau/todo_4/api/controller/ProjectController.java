@@ -25,7 +25,7 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.bind.annotation.PutMapping;
 
 @Controller
-@RequestMapping("/projects")
+@RequestMapping("/api/projects")
 @AllArgsConstructor
 public class ProjectController {
     private final TodoService todoService;

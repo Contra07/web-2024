@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
-@RequestMapping("/projects/{projectId}/tasks")
+@RequestMapping("/api/projects/{projectId}/tasks")
 @AllArgsConstructor
 public class TaskController {
     private final TodoService todoService;

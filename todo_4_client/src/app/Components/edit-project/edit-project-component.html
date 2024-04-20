@@ -1,0 +1,47 @@
+<form #projectForm="ngForm">
+  <div class="form-group">
+    <label for="name">Название</label>
+    <input
+      type="text"
+      class="form-control"
+      id="name"
+      required
+      [(ngModel)]="project.name"
+      name="name"
+    />
+  </div>
+  <div class="form-group">
+    <label for="description">Описание</label>
+    <textarea
+      title="description"
+      class="form-control"
+      id="description"
+      name="description"
+    ></textarea>
+  </div>
+  <div class="form-group">
+    <label for="startDate">Дата начала</label>
+    <input
+      type="date"
+      name="startDates"
+      class="form-control"
+      title="startDate"
+      required
+      [(ngModel)]="project.startDate"
+    />
+  </div>
+  <div class="form-group">
+    <label for="endDate">Дата начала</label>
+    <input
+      type="date"
+      name="endDate"
+      class="form-control"
+      title="endDate"
+      required
+      [(ngModel)]="project.endDate"
+    />
+  </div>
+  <div class="form-group">
+    <button class="form-control" type="submit" (submit)="submitForm">Создать проект</button>
+  </div>
+</form>

@@ -1,0 +1,10 @@
+<div>
+  <h4>{{project?.name}}</h4>
+  <h5>Дата начала: {{project?.startDate | date}}</h5>
+  <h5>Дата завершения: {{project?.endDate | date}}</h5>
+  <h5>Незавершенных задач: {{taskNumber}}</h5>
+</div>
+<div>
+  <button [routerLink]="['/projects/',project?.id]">Открыть</button>
+  <button [routerLink]="['/tasks/',project?.id]">Задачи</button>
+</div>
