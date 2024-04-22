@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, of } from 'rxjs';
 import { Task } from '../Types/Task';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
-  private projectUrl = '/api/projects';
+  private projectUrl = `${environment.apiUrl}/projects`;
   private taskUrl = 'tasks';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -46,11 +47,11 @@ export class TaskService {
       .pipe(catchError(this.handleError<Task>('addTask', undefined)));
   }
 
-  public deleteProject(projectID: string, id: string): Observable<Task> {
+  public deleteTask(projectID: string, id: string): Observable<void> {
     const url = `${this.projectUrl}/${projectID}/${this.taskUrl}/${id}`;
     return this.http
-      .delete<Task>(url, this.httpOptions)
-      .pipe(catchError(this.handleError<Task>('deleteProject', undefined)));
+      .delete<void>(url, this.httpOptions)
+      .pipe(catchError(this.handleError<void>('deleteTask', undefined)));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

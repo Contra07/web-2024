@@ -9,6 +9,7 @@ import { TaskListComponent } from './Components/task-list/task-list-component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProjectShowComponent } from './Components/project-show/project-show.component';
 import { FormsModule } from '@angular/forms';
+import { TaskShowComponent } from './Components/task-show/task-show.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,6 +17,7 @@ import { FormsModule } from '@angular/forms';
     EditProjectComponent,
     TaskListComponent,
     ProjectShowComponent,
+    TaskShowComponent,
   ],
   imports: [
     BrowserModule,

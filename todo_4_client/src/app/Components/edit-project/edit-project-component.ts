@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectService } from '../../Services/project.service';
 import { Project } from '../../Types/Project';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-project',
@@ -9,16 +9,20 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './edit-project-component.css',
 })
 export class EditProjectComponent implements OnInit {
+  protected isError: boolean = false;
+  protected isNewProject: boolean = true;
   protected project: Project;
   constructor(
     private projectService: ProjectService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     this.project = this.projectService.getEmptyProject();
   }
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
-      if (params.get('projectId') === 'new') {
+      this.isNewProject = params.get('projectId') === 'new';
+      if (this.isNewProject) {
         this.project = this.projectService.getEmptyProject();
       } else {
         this.projectService
@@ -27,7 +31,23 @@ export class EditProjectComponent implements OnInit {
       }
     });
   }
-  protected submitForm(even: any) {
-    console.log(even)
+  protected onSubmit() {
+    if (this.isNewProject) {
+      this.projectService.addProject(this.project).subscribe((result) => {
+        this.isError = result === undefined;
+        if (!this.isError) {
+          this.router.navigate(['projects']);
+        }
+      });
+    } else {
+      this.projectService.updateProject(this.project).subscribe(
+        (result) => {
+          this.isError = result === undefined;
+          if(!this.isError){
+            this.router.navigate(['projects']);
+          }
+        }
+      )
+    }
   }
 }

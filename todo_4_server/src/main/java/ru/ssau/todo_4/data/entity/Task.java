@@ -7,6 +7,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
@@ -14,15 +17,20 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 @jakarta.persistence.Entity
 @Table(name = "task", schema = "public")
-@Data
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
-public class Task extends Entity{
+@Getter
+@Setter
+public class Task{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", length = 100)
+    private UUID id;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "projectid", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private Project project;
@@ -36,7 +44,7 @@ public class Task extends Entity{
     @Column(name = "done")
     private boolean done;
     public Task(UUID id, Project project, String name, String description, LocalDate completionDate, boolean done) {
-        super(id);
+        this.id=id;
         this.project = project;
         this.name = name;
         this.description = description;

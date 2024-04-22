@@ -6,23 +6,32 @@ import java.util.UUID;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @jakarta.persistence.Entity
 @Table(name = "project", schema = "public")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
-public class Project extends Entity{
+public class Project{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", length = 100)
+    private UUID id;
     @Column(name = "name", length = 100)
     private String name;
     @Column(name = "description", columnDefinition = "TEXT")
@@ -33,11 +42,11 @@ public class Project extends Entity{
     @Column(name = "enddate")
     @Temporal(TemporalType.DATE)
     private LocalDate endDate;
-    @OneToMany(mappedBy = "project", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "project", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Task> tasks;
 
     public Project(UUID id, String name, String description, LocalDate startDate, LocalDate endDate, Set<Task> tasks){
-        super(id);
+        this.id = id;
         this.name = name;
         this.description = description;
         this.startDate = startDate;

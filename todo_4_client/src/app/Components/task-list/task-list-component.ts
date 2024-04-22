@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../../Services/task.service';
 import { Task } from '../../Types/Task';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-task-list-component',
@@ -11,19 +9,30 @@ import { switchMap } from 'rxjs/operators';
   styleUrl: './task-list-component.css',
 })
 export class TaskListComponent implements OnInit {
+  protected projectId: string | null = null;
   protected tasks: Task[] = [];
   constructor(
     private taskService: TaskService,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
-    this.route.paramMap.subscribe(
-      (params) => {
-
-        this.taskService
-          .getTasks(<string>params.get('projectId'))
-          .subscribe((tasks) => (this.tasks = tasks));
-      }
-    );
+    this.route.paramMap.subscribe((params) => {
+      this.projectId = params.get('projectId');
+      this.getAllTasks();
+    });
+  }
+  getAllTasks() {
+    if (this.projectId !== null) {
+      this.taskService
+        .getTasks(this.projectId)
+        .subscribe((tasks) => (this.tasks = tasks));
+    }
+  }
+  deleteTask(id: string) {
+    if (this.projectId !== null) {
+      this.taskService.deleteTask(this.projectId, id).subscribe((tasks) => {
+        this.getAllTasks();
+      });
+    }
   }
 }

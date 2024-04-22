@@ -1,47 +1,28 @@
-<form #projectForm="ngForm">
+<form (ngSubmit)="onSubmit()" #projectForm="ngForm">
   <div class="form-group">
     <label for="name">Название</label>
-    <input
-      type="text"
-      class="form-control"
-      id="name"
-      required
-      [(ngModel)]="project.name"
-      name="name"
-    />
+    <input #name="ngModel" type="text" class="form-control" id="name" required [(ngModel)]="project.name" name="name" />
   </div>
   <div class="form-group">
     <label for="description">Описание</label>
-    <textarea
-      title="description"
-      class="form-control"
-      id="description"
-      name="description"
-    ></textarea>
+    <textarea title="description" class="form-control" id="description" [(ngModel)]="project.description" name="description"></textarea>
   </div>
   <div class="form-group">
     <label for="startDate">Дата начала</label>
-    <input
-      type="date"
-      name="startDates"
-      class="form-control"
-      title="startDate"
-      required
-      [(ngModel)]="project.startDate"
-    />
+    <input type="date" name="startDates" class="form-control" title="startDate" required
+      [(ngModel)]="project.startDate" />
   </div>
   <div class="form-group">
     <label for="endDate">Дата начала</label>
-    <input
-      type="date"
-      name="endDate"
-      class="form-control"
-      title="endDate"
-      required
-      [(ngModel)]="project.endDate"
-    />
+    <input type="date" name="endDate" class="form-control" title="endDate" required [(ngModel)]="project.endDate " />
   </div>
   <div class="form-group">
-    <button class="form-control" type="submit" (submit)="submitForm">Создать проект</button>
+    <button type="submit" class="btn btn-success form-control" [disabled]="!projectForm.form.valid">
+      Сохранить проект
+    </button>
   </div>
 </form>
+<div id="errorSnackbar" #errorSnackbar [hidden]="!isError" class="toast show">
+  <div class="toast-header">Ошибка</div>
+  <div class="toast-body">Проект не сохранен</div>
+</div>

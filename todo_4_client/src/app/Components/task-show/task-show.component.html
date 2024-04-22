@@ -1,0 +1,14 @@
+<div class="card d-grid gap-2">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"
+      [ngClass]="{ 'text-decoration-line-through': task?.done, 'text-danger': isTaskExpired() }">
+      {{task?.name }}
+    </li>
+    <li class="list-group-item">
+      Дата завершения: {{ task?.completionDate | date : 'dd/M/yyyy' | uppercase}}
+    </li>
+  </ul>
+  <div class="d-grid">
+    <button type="button" class="btn btn-secondary" (click)="raiseDeleteTaskEvent()">Удалить задачу</button>
+  </div>
+</div>

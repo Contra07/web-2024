@@ -3,6 +3,8 @@ package ru.ssau.todo_4.data.repository;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import jakarta.transaction.Transactional;
@@ -19,6 +21,9 @@ import java.util.Optional;
 public interface ITaskRepository extends JpaRepository<Task, UUID>{
     Set<Task> findAllByProject_Id(UUID project_Id);
     Optional<Task> findByIdAndProject_Id(UUID id, UUID projectId);  
+    @Transactional
+    @Modifying
+    @Query(value = "DELETE FROM task t where t.id = ?1 and t.projectid=?2", nativeQuery=true)
     void deleteByIdAndProject_Id(UUID id, UUID projectId);
     @Transactional
     void deleteAllByDoneAndProject_Id(boolean done, UUID projectId);

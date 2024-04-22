@@ -79,7 +79,7 @@ public class TaskController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteTask(@PathVariable String projectId, @PathVariable String id) {
         try{
-            return todoService.deleteTask(UUID.fromString(id), UUID.fromString(id)) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
+            return todoService.deleteTask(UUID.fromString(projectId), UUID.fromString(id)) ? ResponseEntity.noContent().build() : ResponseEntity.notFound().build();
         }
         catch(Exception ex){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());

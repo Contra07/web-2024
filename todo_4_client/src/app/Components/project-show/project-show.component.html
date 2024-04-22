@@ -1,10 +1,12 @@
-<div>
-  <h4>{{project?.name}}</h4>
-  <h5>Дата начала: {{project?.startDate | date}}</h5>
-  <h5>Дата завершения: {{project?.endDate | date}}</h5>
-  <h5>Незавершенных задач: {{taskNumber}}</h5>
-</div>
-<div>
-  <button [routerLink]="['/projects/',project?.id]">Открыть</button>
-  <button [routerLink]="['/tasks/',project?.id]">Задачи</button>
+<div class="card d-grid gap-2">
+  <label class="card-header">{{project?.name}}</label>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Дата начала: {{project?.startDate | date : 'dd/M/yyyy' | uppercase}}</li>
+    <li class="list-group-item">Дата завершения: {{project?.endDate |  date : 'dd/M/yyyy' | uppercase}}</li>
+    <li class="list-group-item">Незавершенных задач: {{taskNumber}}</li>
+  </ul>
+  <div class="d-grid gap-2">
+    <button class="btn btn-secondary" type="button" [routerLink]="['/projects/',project?.id]">Редактировать</button>
+    <button class="btn btn-secondary" type="button" [routerLink]="['/tasks/',project?.id]">Задачи</button>
+  </div>
 </div>

@@ -1,28 +1,23 @@
-<h2>Проекты</h2>
-
-<div>
-  <button [routerLink]="'/projects/new'">Создать новый проект</button>
+<div class="contanier">
+  <h2 class="text-center">Проекты</h2>
+  <div class="d-grid gap-2 d-md-flex">
+    <nav class="navbar input-group">
+      <span class="input-group-text">Поиск</span>
+      <input type="text" class="form-control" placeholder="Название или описание" #box
+        (keyup.enter)="onEnter(box.value)">
+    </nav>
+    <button type="button" class="btn btn-primary" [routerLink]="'/projects/new'">Добавить</button>
+  </div>
+  <div *ngIf="projectsToShow.length != 0; else elseBlock">
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let project of projectsToShow">
+        <app-project-show [project]="project" [taskNumber]="taskNumber.get(project.id)"></app-project-show>
+      </li>
+    </ul>
+  </div>
+  <ng-template #elseBlock>
+    <div>
+      <label class="text-center">Проекты отсутствуют</label>
+    </div>
+  </ng-template>
 </div>
-<div>
-  <input
-    type="search"
-    title="search bar"
-    #box
-    (keyup.enter)="onEnter(box.value)"
-  />
-</div>
-<div *ngIf="projectsToShow.length != 0; else elseBlock">
-  <ul>
-    <li *ngFor="let project of projectsToShow">
-      <app-project-show
-        [project]="project"
-        [taskNumber]="taskNumber.get(project.id)"
-      ></app-project-show>
-    </li>
-  </ul>
-</div>
-<ng-template  #elseBlock>
-<div>
-  <h3> Проекты не наедены</h3>
-</div>
-</ng-template >

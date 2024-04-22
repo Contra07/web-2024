@@ -68,12 +68,12 @@ public class ProjectController {
 
     @PutMapping("/{id}")
     public ResponseEntity<ProjectPojo> putProject(@PathVariable String id, @RequestBody ProjectPojo projectPojo) {
-        try {
+        // try {
             Optional<ProjectPojo> project = todoService.updateProject(UUID.fromString(id), projectPojo);
             return project.isEmpty() ? ResponseEntity.badRequest().build() : ResponseEntity.ok().body(project.get());
-        } catch (Exception ex) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());
-        }
+        // } catch (Exception ex) {
+        //     throw new ResponseStatusException(HttpStatus.BAD_REQUEST, ex.getMessage());
+        // }
     }
 
     @DeleteMapping("/{id}")

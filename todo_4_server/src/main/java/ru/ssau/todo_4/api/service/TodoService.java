@@ -39,7 +39,7 @@ public class TodoService {
         if(projectRepository.existsById(id)){
             Project project = pojo.toEntity();
             project.setId(id);
-            project.setTasks(taskRepository.findAllByProject_Id(project.getId()));
+            project.setTasks(taskRepository.findAllByProject_Id(id));
             return Optional.of(ProjectPojo.fromEntity(projectRepository.saveAndFlush(project)));
         }
         return Optional.empty();
@@ -80,7 +80,7 @@ public class TodoService {
     }
 
     public boolean deleteTask(UUID projectId, UUID id) {
-        taskRepository.deleteByIdAndProject_Id(id, projectId);
+        taskRepository.deleteByIdAndProject_Id(id,projectId);
         return !taskRepository.existsById(id);
     }
 
