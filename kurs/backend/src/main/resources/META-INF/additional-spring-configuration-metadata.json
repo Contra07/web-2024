@@ -1,0 +1,17 @@
+{"properties": [
+  {
+    "name": "security.roles",
+    "type": "java.lang.String",
+    "description": "A description for 'security.roles'"
+  },
+  {
+    "name": "security.logins",
+    "type": "java.lang.String",
+    "description": "A description for 'security.logins'"
+  },
+  {
+    "name": "security.passwords",
+    "type": "java.lang.String",
+    "description": "A description for 'security.passwords'"
+  }
+]}
