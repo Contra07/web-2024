@@ -1,0 +1,13 @@
+<div class="card h-100 " [ngClass]="{ 'border-success': isSelected, 'border-primary': !isSelected }">
+  <div class="ratio ratio-1x1">
+    <img class="card-img-top" src={{item?.asset?.picturePath}} alt="[ No image ]">
+  </div>
+  <div class="card-body">
+    <h6 class="text-truncate text-center">{{item?.asset?.name}}</h6>
+  </div>
+  <div class="card-footer">
+    <div class="row gy-1">
+      <button type="button" title="edit" class="btn btn-secondary" (click)="onSelect()">Выбрать</button>
+    </div>
+  </div>
+</div>

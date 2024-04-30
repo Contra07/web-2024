@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="row gy-2">
+    <div class="col-md-2" *ngFor="let item of items">
+      <app-trade-item-show [item]="item" (selectItemEvent)="onSelectItemEvent($event)"
+        (deselectItemEvent)="onDeselectItemEvent($event)"
+        [isSelected]="selectedItem?.id == item.id"></app-trade-item-show>
+    </div>
+  </div>
+</div>

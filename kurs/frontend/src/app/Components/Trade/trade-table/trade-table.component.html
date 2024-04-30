@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 align-self-center mb-3">
+      <div class="container">
+        <div class="row" *ngFor="let itemi of itemsToTradeToShow">
+          <div class="col gy-3" *ngFor="let item of itemi">
+            <app-trade-cell [item]="item" (selectItemToTradeEvent)="onSelectItemToTradeEvent($event)"
+              (deleteItemToTradeEvent)="onDeleteItemToTradeEvent($event)"></app-trade-cell>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 align-self-center mb-3">
+      <div class="container">
+        <div class="row justify-content-center mb-3">
+          <div class="col-md-6">
+            <h5 class="text-center">Результат</h5>
+          </div>
+        </div>
+        <div class="row justify-content-center mb-3">
+          <div class="col-md-6">
+            <app-trade-cell [item]="itemResultToShow"></app-trade-cell>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <button type="button" title="trade" class="btn btn-primary w-100" (click)="OnSaveClick()">Сохранить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

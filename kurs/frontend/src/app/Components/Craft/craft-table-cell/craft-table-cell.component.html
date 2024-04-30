@@ -1,0 +1,15 @@
+<div class="card h-100 border-secondary" >
+  <div class="card-body">
+    <div class="ratio ratio-1x1">
+      <img class="card-img-top" src={{asset?.asset?.picturePath}} alt="[ No image ]" (click)="onSelectClick()">
+    </div>
+    <h6 class="text-center text-truncate">{{asset?.asset?.name}}</h6>
+  </div>
+  <div class="card-footer">
+    <div class="row gy-1">
+      <button title="Удалить" type="button" class="btn btn-danger" (click)="onDeleteClick()"> Х </button>
+    </div>
+  </div>
+</div>
+
+

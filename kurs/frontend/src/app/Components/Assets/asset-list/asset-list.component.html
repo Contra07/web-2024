@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="gap-2">
+      <div class="d-grid gap-2 d-md-flex">
+        <nav class="navbar input-group">
+          <span class="input-group-text">Поиск</span>
+          <input type="text" class="form-control" placeholder="Название" #box (keyup.enter)="onEnter(box.value)">
+        </nav>
+        <button type="button" class="btn btn-primary" [routerLink]="'/assets/new'">Добавить</button>
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="container">
+      <div class="row gy-2">
+        <div class="col-md-2" *ngFor="let asset of assetsFiltred">
+          <app-asset-show [asset]="asset" (deleteAssetEvent)="deleteAsset($event)"></app-asset-show>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

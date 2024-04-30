@@ -1,0 +1,6 @@
+<div class="container">
+  <app-craft-table [retcipeId]="recipeId" [assetBuffer]="assetBuffer" [isNew]="isNewRecipe"></app-craft-table>
+</div>
+<div class="container">
+  <app-recipe-asset-list (bufferChangedEvent)="bufferChangedEvent($event)"  ></app-recipe-asset-list>
+</div>

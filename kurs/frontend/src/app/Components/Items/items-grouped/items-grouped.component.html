@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="d-grid gap-2 d-md-flex">
+      <nav class="navbar input-group">
+        <span class="input-group-text">Поиск</span>
+        <input type="text" class="form-control" placeholder="Название" #box (keyup.enter)="onEnter(box.value)">
+      </nav>
+      <button type="button" class="btn btn-primary" (click)="onGetRandomItem()">Получить</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="container">
+      <div class="row gy-2">
+        <div class="col-md-2"  *ngFor="let item of itemsFiltred">
+          <div class="card">
+            <div class="card border-primary">
+              <div class="card border-primary h-100">
+                <div class="ratio ratio-1x1">
+                  <img class="card-img-top" src={{item?.asset?.picturePath}} alt="[ No image ]">
+                </div>
+                <div class="card-body">
+                  <h6 class="card-title text-truncate text-center">{{item?.asset?.name}}</h6>
+                  <h6 class="card-title text-truncate text-center">{{item?.itemsNumber}}</h6>
+                </div>
+                <div class="card-footer">
+                <div class="row gy-1">
+                    <button type="button" title="open" class="btn btn-secondary" [routerLink]="[item.asset.id]">Открыть</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

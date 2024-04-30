@@ -25,6 +25,7 @@ BEGIN
     CREATE TABLE IF NOT EXISTS AssetIn(
         Id UUID PRIMARY KEY DEFAULT gen_random_uuid() not null,
         AssetId UUID REFERENCES Asset(Id) not null,
+        RecipeId UUID REFERENCES Recipe(Id) not null,
         Quantity int not null,
         Col int not null,
         Row int not null

@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row gap-2">
+    <div class="col gap-2 col-md-3">
+      <div class="card border-primary">
+        <img class="card-img-top" src={{asset?.picturePath}} alt="[ No image ]">
+        <div class="card-body">
+        </div>
+        <div class="card-footer">
+          <p class="card-title text-center text-truncate">{{asset?.name}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col gap-2">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">№</th>
+            <th scope="col">Получен</th>
+            <th scope="col">Действие</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let item of items; let i= index">
+          <tr class="gap-2" >
+            <th scope="row">{{i+1}}</th>
+            <td>{{item.createdOn | date: 'dd.MM.yy'  }}</td>
+            <td>
+              <button title="delete" type="button" class="btn btn-secondary" (click)="onDelete(item.id)" clickable>Удалить</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

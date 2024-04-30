@@ -1,10 +1,12 @@
-package ru.ssau.kurs.security;
+package ru.ssau.kurs.api.security;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -23,18 +25,18 @@ public class DefaultSecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-    
+
     @Bean
-    UserDetailsService inMemoryUserDetailsManager(@Value("${security.logins}") List<String> logins, @Value("${security.passwords}") List<String> passwords, @Value("${security.roles}") List<String> roles) {
+    UserDetailsService inMemoryUserDetailsManager(@Value("${security.logins}") List<String> logins,
+            @Value("${security.passwords}") List<String> passwords, @Value("${security.roles}") List<String> roles) {
         List<UserDetails> users = new ArrayList<UserDetails>();
-        int size = Math.min(logins.size(), Math.min(passwords.size(),roles.size()));
-        for(int i = 0; i<size; i++){
+        int size = Math.min(logins.size(), Math.min(passwords.size(), roles.size()));
+        for (int i = 0; i < size; i++) {
             users.add(
-                User.withUsername(logins.get(i))
-                .password(passwordEncoder().encode(passwords.get(i)))
-                .roles(roles.get(i))
-                .build()
-            );
+                    User.withUsername(logins.get(i))
+                            .password(passwordEncoder().encode(passwords.get(i)))
+                            .roles(roles.get(i))
+                            .build());
         }
         return new InMemoryUserDetailsManager(users);
     }
@@ -42,15 +44,16 @@ public class DefaultSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf((csrf) -> {csrf.disable();})
+                .csrf((csrf) -> {
+                    csrf.disable();
+                })
                 .authorizeHttpRequests(
                         (requests) -> requests
-                        // .requestMatchers(HttpMethod.POST, "/projects").hasRole("ADMIN")
-                        // .requestMatchers(HttpMethod.PUT, "/projects/{id}").hasRole("ADMIN")
-                        // .requestMatchers(HttpMethod.DELETE, "/projects/{id}").hasRole("ADMIN")
-                        //.anyRequest().authenticated()
-                        .anyRequest().anonymous()
-                ).httpBasic(Customizer.withDefaults());
+                                .requestMatchers( "/api/**").authenticated()
+                                .requestMatchers("/api/login").anonymous()
+                                .anyRequest().anonymous())
+
+                .httpBasic(Customizer.withDefaults());
         return http.build();
     }
 }

@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <form (ngSubmit)="onSubmit()" #projectForm="ngForm" class="col-md-4">
+      <div class="form-group">
+        <label for="name">Название</label>
+        <input #name="ngModel" type="text" class="form-control" id="name" required [(ngModel)]="asset.name"
+          name="name" />
+      </div>
+      <div class="form-group">
+        <label for="picturePath">Ссылка на изображение</label>
+        <input #name="ngModel" type="text" class="form-control" id="picturePath" required
+          [(ngModel)]="asset.picturePath" name="picturePath" />
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-success form-control" [disabled]="!projectForm.form.valid">
+          Сохранить
+        </button>
+      </div>
+    </form>
+    <div class="col-md-3 card">
+      <div class="ratio ratio-1x1">
+        <img class="card-img-top" src={{asset.picturePath}} alt="[ No image ]" [routerLink]="[asset.id]">
+      </div>
+    </div>
+    <div id="errorSnackbar" #errorSnackbar [hidden]="!isError" class="toast show">
+      <div class="toast-header">Ошибка</div>
+      <div class="toast-body">Ассет не сохранен</div>
+    </div>
+  </div>
+</div>

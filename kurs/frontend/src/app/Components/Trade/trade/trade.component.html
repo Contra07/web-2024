@@ -1,0 +1,6 @@
+<div class="container">
+  <app-trade-table [itemBuffer]="itemBuffer"></app-trade-table>
+</div>
+<div class="container">
+  <app-trade-item-list (bufferChangedEvent)="bufferChangedEvent($event)"></app-trade-item-list>
+</div>

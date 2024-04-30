@@ -1,0 +1,14 @@
+<div class="card border-primary h-100">
+  <div class="ratio ratio-1x1">
+    <img class="card-img-top" src={{recipe?.asset?.picturePath}} alt="[ No image ]" [routerLink]="[recipe?.id]">
+  </div>
+  <div class="card-body">
+    <h6 class="text-center text-truncate">{{recipe?.asset?.name}}</h6>
+  </div>
+  <div class="card-footer">
+    <div class="row gy-1">
+      <button type="button" title="edit" class="btn btn-secondary" [routerLink]="[recipe?.id]">Редактировать</button>
+      <button type="button" title="delete" class="btn btn-secondary" (click)="onDelete()">Удалить</button>
+    </div>
+  </div>
+</div>

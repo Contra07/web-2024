@@ -1,0 +1,8 @@
+
+<div class="container">
+  <div class="row gy-2">
+    <div class="col-md-2" *ngFor="let asset of assets">
+      <app-recipe-asset-show [asset]="asset" (selectAssetEvent)="onSelectAssetEvent($event)" (deselectAssetEvent)="onDeselectAssetEvent($event)" [isSelected]="selectedAsset?.id == asset.id"></app-recipe-asset-show>
+    </div>
+  </div>
+</div>
